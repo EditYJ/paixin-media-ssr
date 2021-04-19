@@ -3,7 +3,7 @@ import { Router } from 'vue-router'
 import { ISSRContext } from 'ssr-types'
 import { IndexData } from '@/interface'
 import { GlobalStore } from '@/store'
-import { getHomeInitData } from '@/api/home'
+import { getHomeInitData } from '@/api'
 interface IApiService {
   index: () => Promise<IndexData>
 }

@@ -8,11 +8,13 @@ const service = axios.create({
 
 service.interceptors.response.use(
   response => {
+    console.log('自定义环境变量', process.env.BASE_URL)
     if (response.status === 200) {
       return response.data
     }
   },
   async error => {
+    console.log('自定义环境变量', process.env.BASE_URL)
     if (__isBrowser__) {
       ElMessage({
         type: 'error',
