@@ -5,6 +5,7 @@
   "dependencies": {
     "@midwayjs/decorator": "^2.3.0",
     "@midwayjs/web": "^2.3.0",
+    "axios": "^0.21.1",
     "egg": "^2.0.0",
     "egg-scripts": "^2.10.0",
     "element-plus": "^1.0.2-beta.40",
