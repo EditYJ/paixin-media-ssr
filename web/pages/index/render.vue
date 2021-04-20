@@ -5,6 +5,7 @@
     <template v-if="indexData">
       <el-button @click="testClick"> 我是element按钮index </el-button>
       <div class="test-block">hahaha</div>
+      <input type="text" />
       <img src="/images/expired-coupon-dialog.png" alt="" />
       <pre>{{ indexData }}</pre>
     </template>
@@ -45,7 +46,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .test-block {
   font-size: 16px;
-  color: white;
+  color: $color-primary;
   background-color: gray;
   width: 250px;
   height: 250px;

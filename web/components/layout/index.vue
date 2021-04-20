@@ -24,6 +24,6 @@
   </html>
 </template>
 
-<style>
-@import '../../styles/base/normalize.css';
+<style lang="scss">
+@import '../../styles/index.scss';
 </style>

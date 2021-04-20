@@ -30,7 +30,10 @@ function handleSass(config) {
     .use('sass-loader')
     .loader('sass-loader')
     .options({
-      additionalData: '@import "web/styles/tools/_sassMagic.scss";',
+      additionalData: `
+        @import "web/styles/tools/_index.scss";
+        @import "web/styles/settings/_index.scss";
+      `,
     })
     .end()
 }
