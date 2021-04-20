@@ -37,7 +37,11 @@ function handleSass(config) {
  * @returns {{[key:string]:string}}
  */
 function resolveEnv() {
-  const res = require('dotenv').config({ path: '.env.development' })
+  const envList = {
+    production: '.env.production',
+    development: '.env.development',
+  }
+  const res = require('dotenv').config({ path: `${envList[process.env.NODE_ENV]}` })
   if (res.error) {
     throw res.error
   }
@@ -65,6 +69,6 @@ module.exports = {
   chainBaseConfig: config => {
     handleSass(config)
     injectEnv(config)
-    console.log(config.toString())
+    // console.log(config.toString())
   },
 }
