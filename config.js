@@ -29,6 +29,9 @@ function handleSass(config) {
     .end()
     .use('sass-loader')
     .loader('sass-loader')
+    .options({
+      additionalData: '@import "web/styles/tools/_sassMagic.scss";',
+    })
     .end()
 }
 

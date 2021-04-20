@@ -25,5 +25,5 @@
 </template>
 
 <style>
-@import '../../styles/normalize.css';
+@import '../../styles/base/normalize.css';
 </style>
