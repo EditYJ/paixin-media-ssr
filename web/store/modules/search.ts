@@ -1,8 +1,8 @@
 import { SearchContent } from '@/interface'
 import { Module } from 'vuex'
-import { GlobalStore } from '..'
+import { GlobalStoreProps } from '..'
 
-const searchStore: Module<SearchContent, GlobalStore> = {
+const searchStore: Module<SearchContent, GlobalStoreProps> = {
   namespaced: true,
   state: {
     searchText: '',

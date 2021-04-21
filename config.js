@@ -39,7 +39,7 @@ function handleSass(config) {
 }
 
 /**
- * 解析环境变量
+ * 解析环境变量并注入服务端
  * @returns {{[key:string]:string}}
  */
 function resolveEnv() {

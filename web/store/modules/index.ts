@@ -1,8 +1,8 @@
 import { Module } from 'vuex'
 import { ComponentsArr } from '@/interface/page-index'
-import { GlobalStore } from '@/store/index'
+import { GlobalStoreProps } from '@/store/index'
 
-const indexStore: Module<ComponentsArr, GlobalStore> = {
+const indexStore: Module<ComponentsArr, GlobalStoreProps> = {
   namespaced: true,
   state: {
     components: [

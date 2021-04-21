@@ -1,24 +1,32 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { getStore } from '@/store'
+
+function startLoading() {
+  const store = getStore()
+  store?.commit('global/startLoading')
+}
+function finishLoading() {
+  const store = getStore()
+  store?.commit('global/finishLoading')
+}
 
 const service = axios.create({
   baseURL: process.env.BASE_URL,
   timeout: 3000,
 })
 
+service.interceptors.request.use(config => {
+  startLoading()
+  return config
+})
+
 service.interceptors.response.use(
   response => {
-    if (response.status === 200) {
-      return response.data
-    }
+    finishLoading()
+    return response.data
   },
   async error => {
-    if (__isBrowser__) {
-      ElMessage({
-        type: 'error',
-        message: `请求发生错误：${error}`,
-      })
-    }
+    finishLoading()
     return await Promise.reject(error)
   },
 )

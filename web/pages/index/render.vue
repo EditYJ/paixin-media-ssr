@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <h1>{{ isLoading }}</h1>
     <Search />
     <template v-if="indexData">
       <el-button @click="testClick"> 我是element按钮index </el-button>
@@ -21,7 +22,7 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
-import { GlobalStore } from '@/store/index'
+import { GlobalStoreProps } from '@/store/index'
 import service from '@/utils/service'
 
 import Search from '@/components/search/index.vue'
@@ -31,14 +32,15 @@ export default defineComponent({
     Search,
   },
   setup() {
-    const store = useStore<GlobalStore>()
+    const store = useStore<GlobalStoreProps>()
+    const isLoading = computed(() => store.getters['global/isLoading'])
     const indexData = computed(() => store.state.indexStore.components)
 
     const testClick = () => {
       service.get('/sss/s')
     }
 
-    return { indexData, testClick }
+    return { indexData, testClick, isLoading }
   },
 })
 </script>
