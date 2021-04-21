@@ -1,18 +1,21 @@
 <template>
-  <div class="searchContainer">
-    <input
-      :value="searchText"
-      type="text"
-      class="input"
-      placeholder="该搜索框内容会在所有页面共享"
-      @input="setText"
-    />
-    <img
-      src="https://img.alicdn.com/tfs/TB15zSoX21TBuNjy0FjXXajyXXa-48-48.png"
-      alt=""
-      class="searchImg"
-      @click="toSearch"
-    />
+  <div class="search-content">
+    <div class="search">
+      <input
+        :value="searchText"
+        type="text"
+        class="search__input"
+        placeholder="该搜索框内容会在所有页面共享"
+        @input="setText"
+      />
+      <img
+        src="https://img.alicdn.com/tfs/TB15zSoX21TBuNjy0FjXXajyXXa-48-48.png"
+        alt=""
+        class="search__icon"
+        @click="toSearch"
+      />
+    </div>
+    <div am-font-cesyt>初始化</div>
     <el-button>我是element按钮</el-button>
   </div>
 </template>
@@ -45,27 +48,33 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.searchContainer {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .input {
-    width: 80%;
-    height: 30px;
-    border: 0 solid transparent;
-    border-radius: 100px;
-    font-family: Microsoft YaHei, SimHei, helvetica, arial, verdana, tahoma, sans-serif;
-    font-size: 14px;
-    background: rgba(0, 0, 0, 0.06);
-    text-indent: 15px;
-    outline: none;
-    margin: 20px 0px;
+.search-content {
+  @include box-center(false, center);
+  flex-direction: column;
+  @include b(search) {
+    width: 100%;
+    height: 50px;
+    @include box-center;
+    @include e(input) {
+      width: 80%;
+      height: 30px;
+      border: 0 solid transparent;
+      border-radius: 100px;
+      font-family: Microsoft YaHei, SimHei, helvetica, arial, verdana, tahoma, sans-serif;
+      font-size: 14px;
+      background: rgba(0, 0, 0, 0.06);
+      text-indent: 15px;
+      outline: none;
+      margin: 20px 0px;
+    }
+    @include e(icon) {
+      width: 20px;
+      margin-left: -30px;
+    }
   }
-  .searchImg {
-    width: 20px;
-    margin-left: -30px;
+  @include b(content) {
+    width: 100px;
+    height: 200px;
   }
 }
 </style>

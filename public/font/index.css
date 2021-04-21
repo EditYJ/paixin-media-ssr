@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'cesyt';
+  src: url('./source/cesyt.eot');
+  src:
+    url('./source/cesyt.eot?#font-spider') format('embedded-opentype'),
+    url('./source/cesyt.woff2') format('woff2'),
+    url('./source/cesyt.woff') format('woff'),
+    url('./source/cesyt.ttf') format('truetype'),
+    url('./source/cesyt.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    font-family: 'cesyt';
+}
