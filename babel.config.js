@@ -9,6 +9,7 @@ module.exports = {
           return `element-plus/packages/theme-chalk/src/${name}.scss`
         },
       },
-    ],
+      'element-plus',
+    ]
   ],
 }
