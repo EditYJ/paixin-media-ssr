@@ -12,7 +12,6 @@ interface ClientInfo {
 }
 
 export default async (client: ClientInfo, ctx?: ISSRContext<{ apiService?: IApiService }>) => {
-  // const { store } = client
-  // const data = await getHomeInitData()
-  // await store.dispatch('indexStore/initialData', { payload: data })
+  const { store } = client
+  await store.dispatch('dog/getRandomDog')
 }

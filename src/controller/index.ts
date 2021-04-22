@@ -15,18 +15,18 @@ export class Index {
   @Inject()
   ctx: IEggContext
 
-  @Inject('ApiService')
-  apiService: IApiService
+  // @Inject('ApiService')
+  // apiService: IApiService
 
-  @Inject('ApiDetailService')
-  apiDeatilservice: IApiDetailService
+  // @Inject('ApiDetailService')
+  // apiDeatilservice: IApiDetailService
 
   @Get('/')
-  @Get('/detail/:id')
+  @Get('/randomdog')
   async handler (): Promise<void> {
     try {
-      this.ctx.apiService = this.apiService
-      this.ctx.apiDeatilservice = this.apiDeatilservice
+      // this.ctx.apiService = this.apiService
+      // this.ctx.apiDeatilservice = this.apiDeatilservice
       const stream = await render<Readable>(this.ctx, {
         stream: true
       })

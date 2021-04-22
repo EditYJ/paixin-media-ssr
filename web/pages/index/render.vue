@@ -22,8 +22,8 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { GlobalStoreProps } from '@/store/index'
-import service from '@/utils/service'
 
 import Search from '@/components/search/index.vue'
 
@@ -33,11 +33,12 @@ export default defineComponent({
   },
   setup() {
     const store = useStore<GlobalStoreProps>()
+    const router = useRouter()
     const isLoading = computed(() => store.getters['global/isLoading'])
     const indexData = computed(() => store.state.indexStore.components)
 
     const testClick = () => {
-      service.get('/sss/s')
+      router.push('randomdog')
     }
 
     return { indexData, testClick, isLoading }
