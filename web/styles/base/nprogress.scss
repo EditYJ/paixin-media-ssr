@@ -1,0 +1,11 @@
+//进度条
+#nprogress .bar {
+  background: #fe293f !important;
+}
+#nprogress .peg {
+  box-shadow: 0 0 10px #fe293f, 0 0 5px #fe293f !important;
+}
+#nprogress .spinner {
+  display: none !important;
+  z-index: -1;
+}
