@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { getStore } from '@/store'
 import { ICostomAxiosRequestConfig } from '@/api'
 
@@ -6,7 +6,7 @@ function startLoading(opName: string) {
   const store = getStore()
   store?.commit('global/startLoading', { opName })
 }
-function finishLoading(opName?: string) {
+function finishLoading(opName: string) {
   const store = getStore()
   store?.commit('global/finishLoading', { opName })
 }
@@ -28,8 +28,9 @@ service.interceptors.response.use(
     finishLoading(newConfig.opName)
     return response
   },
-  async error => {
-    finishLoading()
+  async (error: AxiosError) => {
+    const newConfig = error.config as ICostomAxiosRequestConfig
+    finishLoading(newConfig.opName)
     return await Promise.reject(error)
   },
 )

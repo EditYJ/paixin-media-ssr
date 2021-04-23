@@ -26,7 +26,7 @@ const global: Module<GlobalStatus, GlobalStoreProps> = {
   },
   getters: {
     isLoading: state => state.requestNumber > 0,
-    isOpLoading: state => (opName: string) => state.opNames[opName] && state.requestNumber > 0,
+    isOpLoading: state => (opName: string) => state.opNames[opName],
   },
 }
 

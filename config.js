@@ -1,4 +1,12 @@
 /**
+ *  修改图片静态资源打包规则，去除对字体文件的筛选, 主要修复组件库中图标字体文件打包不正确的问题
+ * @param {import('ssr-types/src/third-party/webpack-chain').Config} configModule
+ */
+function fixImageConfig(config) {
+  config.module.rule('images').test(/\.(jpe?g|png|gif)(\?[a-z0-9=.]+)?$/)
+}
+
+/**
  * 处理 sass
  * @param {import('ssr-types/src/third-party/webpack-chain').Config} configModule
  */
@@ -73,6 +81,7 @@ const injectEnv = config => {
  */
 module.exports = {
   chainBaseConfig: config => {
+    fixImageConfig(config)
     handleSass(config)
     injectEnv(config)
     console.log(config.toString())
