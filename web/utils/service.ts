@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { getStore } from '@/store'
+import { ICostomAxiosRequestConfig } from '@/api'
 
-function startLoading() {
+function startLoading(opName: string) {
   const store = getStore()
-  store?.commit('global/startLoading')
+  store?.commit('global/startLoading', { opName })
 }
-function finishLoading() {
+function finishLoading(opName?: string) {
   const store = getStore()
-  store?.commit('global/finishLoading')
+  store?.commit('global/finishLoading', { opName })
 }
 
 const service = axios.create({
@@ -16,14 +17,16 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
-  startLoading()
+  const newConfig = config as ICostomAxiosRequestConfig
+  startLoading(newConfig.opName)
   return config
 })
 
 service.interceptors.response.use(
   response => {
-    finishLoading()
-    return response.data
+    const newConfig = response.config as ICostomAxiosRequestConfig
+    finishLoading(newConfig.opName)
+    return response
   },
   async error => {
     finishLoading()

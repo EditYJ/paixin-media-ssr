@@ -13,5 +13,5 @@ interface ClientInfo {
 
 export default async (client: ClientInfo, ctx?: ISSRContext<{ apiService?: IApiService }>) => {
   const { store } = client
-  await store.dispatch('dog/getRandomDog')
+  await store.dispatch('dog/fetchRandomDog')
 }

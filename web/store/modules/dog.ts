@@ -1,6 +1,7 @@
 import { Module } from 'vuex'
 import { GlobalStoreProps } from '..'
 import { getRandomDog } from '@/api'
+import { actionWrapper } from '@/store'
 
 export interface DogProps {
   imgUrl: String
@@ -12,15 +13,16 @@ const dog: Module<DogProps, GlobalStoreProps> = {
     imgUrl: '',
   },
   mutations: {
-    setDog(state, { message }) {
+    SET_IMG_URL(state, { message }) {
       state.imgUrl = message
     },
   },
   actions: {
-    async getRandomDog(state) {
-      const data = await getRandomDog()
-      state.commit('setDog', data)
-    },
+    fetchRandomDog: actionWrapper(getRandomDog, 'SET_IMG_URL'),
+    // async fetchRandomDog(state, payload) {
+    //   const data = await getRandomDog()
+    //   state.commit('setDog', data)
+    // },
   },
 }
 

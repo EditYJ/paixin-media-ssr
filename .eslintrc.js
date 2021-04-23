@@ -8,5 +8,6 @@ module.exports = {
     '@typescript-eslint/space-before-function-paren': 'off',
     '@typescript-eslint/naming-convention': 'off',
     'vue/singleline-html-element-content-newline': 'off',
+    '@typescript-eslint/no-dynamic-delete': 'off',
   },
 }

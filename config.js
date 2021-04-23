@@ -75,6 +75,6 @@ module.exports = {
   chainBaseConfig: config => {
     handleSass(config)
     injectEnv(config)
-    // console.log(config.toString())
+    console.log(config.toString())
   },
 }

@@ -2,7 +2,14 @@
   <div class="random-dog">
     <div class="show-dog">
       <img class="show-dog__photo" :src="imgUrl" />
-      <ElButton class="show-dog__random-btn" @click="changeDog">换一张</ElButton>
+      <ElButton
+        class="show-dog__random-btn"
+        :loading="isChangeDogLoading"
+        icon="el-icon-search"
+        @click="changeDog"
+      >
+        换一张
+      </ElButton>
       <ElButton class="show-dog__random-btn" @click="backHome">回到主页</ElButton>
     </div>
   </div>
@@ -20,14 +27,15 @@ export default defineComponent({
     const router = useRouter()
     const store = useStore<GlobalStoreProps>()
     const imgUrl = computed(() => store.state.dog.imgUrl)
+    const isChangeDogLoading = computed(() => store.getters['global/isOpLoading']('SET_IMG_URL'))
 
     const changeDog = () => {
-      store.dispatch('dog/getRandomDog')
+      store.dispatch('dog/fetchRandomDog')
     }
     const backHome = () => {
       router.push('/')
     }
-    return { imgUrl, changeDog, backHome }
+    return { imgUrl, changeDog, backHome, isChangeDogLoading }
   },
 })
 </script>
