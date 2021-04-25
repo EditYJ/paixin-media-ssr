@@ -3,7 +3,7 @@
  * @param {import('ssr-types/src/third-party/webpack-chain').Config} configModule
  */
 function fixImageConfig(config) {
-  config.module.rule('images').test(/\.(jpe?g|png|gif)(\?[a-z0-9=.]+)?$/)
+  // config.module.rule('images').test(/\.(jpe?g|png|gif)(\?[a-z0-9=.]+)?$/)
 }
 
 /**
@@ -84,7 +84,7 @@ module.exports = {
     fixImageConfig(config)
     handleSass(config)
     injectEnv(config)
-    // console.log(config.toString())
+    console.log(config.toString())
   },
   // 用于插入外部 js
   customeHeadScript: [
