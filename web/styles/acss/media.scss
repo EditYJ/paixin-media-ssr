@@ -1,0 +1,17 @@
+@media only screen and (max-width: 768px) {
+  @include am(hidden, xs) {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  @include am(hidden, md) {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 1920px) {
+  @include am(hidden, lg) {
+    display: none !important;
+  }
+}

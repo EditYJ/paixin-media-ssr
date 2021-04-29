@@ -3,15 +3,15 @@
     <div class="show-dog">
       <icon name="toggles" class="show-dog__costom-icon" />
       <img class="show-dog__photo" :src="imgUrl" />
-      <ElButton
+      <el-button
         :loading="isRandomLoading"
         class="show-dog__random-btn"
         icon="el-icon-search"
         @click="changeDog"
       >
         换一张
-      </ElButton>
-      <ElButton class="show-dog__random-btn" @click="backHome">回到主页</ElButton>
+      </el-button>
+      <el-button am-hidden="md" class="show-dog__random-btn" @click="backHome">回到主页</el-button>
     </div>
   </div>
 </template>
