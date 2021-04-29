@@ -84,7 +84,7 @@ module.exports = {
     fixImageConfig(config)
     handleSass(config)
     injectEnv(config)
-    console.log(config.toString())
+    // console.log(config.toString())
   },
   // 用于插入外部 js
   customeHeadScript: [

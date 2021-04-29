@@ -1,38 +1,49 @@
-import { FetchRequest } from '@/api'
-import { ComponentsArr, SearchContent } from '@/interface/index'
-import { ActionContext, Store } from 'vuex'
-import dog, { DogProps } from './modules/dog'
-import global, { GlobalStatus } from './modules/global'
-import { indexStore } from './modules/index'
-import { searchStore } from './modules/search'
-export interface GlobalStoreProps {
-  global: GlobalStatus
-  dog: DogProps
-  indexStore: ComponentsArr
-  searchStore: SearchContent
+import { CommitOptions, DispatchOptions, Store } from 'vuex'
+import dog, { DogState } from './modules/dog'
+import global, { GlobalState } from './modules/global'
+import { DogMutations } from '@/store/modules/dog/mutations'
+import { DogActions } from '@/store/modules/dog/actions'
+import { DogGetters } from '@/store/modules/dog/getters'
+import { GlobalMutations } from './modules/global/mutations'
+import { GlobalGetters } from './modules/global/getters'
+
+export type NameSpaced<T, N extends string> = {
+  [K in keyof T & string as `${N}/${K}`]: T[K]
 }
 
-export function getStore() {
-  let store: Store<GlobalStoreProps> | undefined
-  if (__isBrowser__) {
-    store = window.__VUE_APP__._context.provides.store
-    // console.log(store)
+export type AllMutations = NameSpaced<DogMutations, 'dog'> & NameSpaced<GlobalMutations, 'global'>
+export type AllActions = NameSpaced<DogActions, 'dog'>
+export type AllGetters = NameSpaced<DogGetters, 'dog'> & NameSpaced<GlobalGetters, 'global'>
+
+export interface State {
+  global: GlobalState
+  dog: DogState
+}
+
+export type AugmentedStore = Omit<Store<State>, 'getters' | 'commit' | 'dispatch'> & {
+  commit: <K extends keyof AllMutations, P extends Parameters<AllMutations[K]>[1]>(
+    key: K,
+    payload?: P,
+    options?: CommitOptions,
+  ) => ReturnType<AllMutations[K]>
+} & {
+  dispatch: <K extends keyof AllActions, P extends Parameters<AllActions[K]>[1]>(
+    key: K,
+    payload?: P,
+    options?: DispatchOptions,
+  ) => ReturnType<AllActions[K]>
+} & {
+  getters: {
+    [K in keyof AllGetters]: ReturnType<AllGetters[K]>
   }
+}
+
+export function useStore() {
+  const store = window.__VUE_APP__._context.provides.store as AugmentedStore
   return store
-}
-
-export function actionWrapper(fetchRequest: FetchRequest, commitName: string) {
-  return async <T = any, S = any>(state: ActionContext<T, S>, payload?: any) => {
-    const newConfig = { ...payload, opName: commitName }
-    const { data } = await fetchRequest(newConfig)
-    state.commit(commitName, data)
-    return data
-  }
 }
 
 export const modules = {
   global,
   dog,
-  indexStore,
-  searchStore,
 }

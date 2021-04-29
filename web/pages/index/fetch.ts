@@ -1,17 +1,7 @@
-import { Store } from 'vuex'
-import { Router } from 'vue-router'
+import { ClientInfo } from '@/interface'
 import { ISSRContext } from 'ssr-types'
-import { IndexData } from '@/interface'
-import { GlobalStoreProps } from '@/store'
-interface IApiService {
-  index: () => Promise<IndexData>
-}
-interface ClientInfo {
-  store: Store<GlobalStoreProps>
-  router: Router
-}
 
-export default async (client: ClientInfo, ctx?: ISSRContext<{ apiService?: IApiService }>) => {
+export default async (client: ClientInfo, ctx?: ISSRContext) => {
   // const { store } = client
   // const data = await getHomeInitData()
   // await store.dispatch('indexStore/initialData', { payload: data })

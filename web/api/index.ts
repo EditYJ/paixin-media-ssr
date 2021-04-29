@@ -1,11 +1,5 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { DogApiUrl } from '@/api/dog'
 
 export * from '@/api/dog'
 
-export type ICostomAxiosRequestConfig = AxiosRequestConfig & {
-  opName: string
-}
-
-export type FetchRequest<R = any> = (
-  config?: ICostomAxiosRequestConfig,
-) => Promise<AxiosResponse<R>>
+export type AllApiUrl = DogApiUrl

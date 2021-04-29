@@ -1,14 +1,14 @@
 import axios, { AxiosError } from 'axios'
-import { getStore } from '@/store'
-import { ICostomAxiosRequestConfig } from '@/api'
+import { useStore } from '@/store'
+import { AllApiUrl } from '@/api'
 
-function startLoading(opName: string) {
-  const store = getStore()
-  store?.commit('global/startLoading', { opName })
+function startLoading(url?: AllApiUrl) {
+  const store = useStore()
+  store?.commit('global/START_LOADING', url)
 }
-function finishLoading(opName: string) {
-  const store = getStore()
-  store?.commit('global/finishLoading', { opName })
+function finishLoading(url?: AllApiUrl) {
+  const store = useStore()
+  store?.commit('global/FINISH_LOADING', url)
 }
 
 const service = axios.create({
@@ -17,20 +17,21 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
-  const newConfig = config as ICostomAxiosRequestConfig
-  startLoading(newConfig.opName)
+  const url = config.url as AllApiUrl | undefined
+  startLoading(url)
   return config
 })
 
 service.interceptors.response.use(
   response => {
-    const newConfig = response.config as ICostomAxiosRequestConfig
-    finishLoading(newConfig.opName)
+    const url = response.config.url as AllApiUrl | undefined
+    finishLoading(url)
+
     return response
   },
   async (error: AxiosError) => {
-    const newConfig = error.config as ICostomAxiosRequestConfig
-    finishLoading(newConfig.opName)
+    const url = error.config.url as AllApiUrl | undefined
+    finishLoading(url)
     return await Promise.reject(error)
   },
 )

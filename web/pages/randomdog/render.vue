@@ -4,8 +4,8 @@
       <icon name="toggles" class="show-dog__costom-icon" />
       <img class="show-dog__photo" :src="imgUrl" />
       <ElButton
+        :loading="isRandomLoading"
         class="show-dog__random-btn"
-        :loading="isChangeDogLoading"
         icon="el-icon-search"
         @click="changeDog"
       >
@@ -17,29 +17,31 @@
 </template>
 
 <script lang='ts'>
-import { useStore } from 'vuex'
 import { computed, defineComponent } from 'vue'
-import { GlobalStoreProps } from '@/store'
+import { useStore } from '@/store'
 import { useRouter } from 'vue-router'
 
 import Icon from '@/components/common/Icon.vue'
+import { DogApiUrl } from '@/api'
 
 export default defineComponent({
   name: 'RandomDog',
   components: { Icon },
   setup(props, ctx) {
     const router = useRouter()
-    const store = useStore<GlobalStoreProps>()
+    const store = useStore()
+    const isRandomLoading = computed(() =>
+      store.getters['global/isOpLoading'](DogApiUrl.RANDOM_DOG),
+    )
     const imgUrl = computed(() => store.state.dog.imgUrl)
-    const isChangeDogLoading = computed(() => store.getters['global/isOpLoading']('SET_IMG_URL'))
 
-    const changeDog = () => {
-      store.dispatch('dog/fetchRandomDog')
+    const changeDog = async () => {
+      await store.dispatch('dog/FETCH_RANDOM_DOG')
     }
     const backHome = () => {
       router.push('/')
     }
-    return { imgUrl, changeDog, backHome, isChangeDogLoading }
+    return { imgUrl, changeDog, backHome, isRandomLoading }
   },
 })
 </script>
@@ -56,7 +58,7 @@ export default defineComponent({
     @include e(random-btn) {
       margin-top: 16px;
     }
-    @include e(costom-icon){
+    @include e(costom-icon) {
       width: 60px;
       height: 60px;
       color: red;
