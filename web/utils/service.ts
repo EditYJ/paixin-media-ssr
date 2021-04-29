@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosError } from 'axios';
 import { useStore } from '@/store'
 import { AllApiUrl } from '@/api'
 
