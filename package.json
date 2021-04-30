@@ -41,8 +41,7 @@
     "deploy": "ssr build && ssr deploy",
     "deploy:tencent": "ssr build && ssr deploy --tencent",
     "lint": "eslint . --ext .js,.tsx,.ts,.vue --cache",
-    "lint:fix": "eslint . --ext .js,.tsx,.ts,.vue --cache --fix",
-    "prepare": "husky install"
+    "lint:fix": "eslint . --ext .js,.tsx,.ts,.vue --cache --fix"
   },
   "midway-integration": {
     "tsCodeRoot": "src"
